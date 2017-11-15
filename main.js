@@ -9,7 +9,8 @@ const WordListener = function ({ word, callback } = {}) {
 	this.callback = callback;
 	this.index = 0;
 	this.listener = ({ key, target }) => {
-		const shouldIgnoreKey = ignoreList.includes(target.tagName.toLowerCase());
+		const targetTag = target && target.tagName.toLowerCase();
+		const shouldIgnoreKey = ignoreList.includes(targetTag) || target.contentEditable === 'true';
 
 		if (shouldIgnoreKey) {
 			this.index = 0;
